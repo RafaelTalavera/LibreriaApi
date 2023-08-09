@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+	<title th:text="'Axioma Soluciones integrales ' + ${titulo}"></title>
+	<meta charset="UTF-8" />
+	<title th:text="${titulo}"></title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+
+</head>
+
+<body>
+
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand text-white" href="#">Axioma</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+						</li>
+						<li class="nav-item">
+
+							<a class="nav-link text-white" th:href="@{/listar_factura}">Facturas</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" th:href="@{/listar_cliente}">Clientes</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" th:href="@{/listar_libro}">Libros</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" th:href="@{/listar_empleado}">Empleados</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="alert amter-success" th:if="${success != null}" th:text="${success}"></div>
+		<div class="alert amter-darger" th:if="${error != null}" th:text="${error}"></div>
+		<<div class="alert amter-warning" th:if="${warning != null}" th:text="${warning}">
+			</div>
+			<div class="alert amter-darger" th:if="${info != null}" th:text="${info}"></div>
+			<div th:if="${#fields.hasErrors('dni')}" class="alert alert-danger" role="alert">
+				<p th:each="error : ${#fields.errors('dni')}" th:text="${error}"> DNI duplicado</p>
+			</div>
+
+	</header>
+
+	<div class="container">
+
+	</div>
+	<footer class="container py-4 text-center bg-light rounded">
+		<hr />
+		<img th:src="@{/images/Logo.jpg}" alt="Axioma Logo" />
+		<p>
+			Este proyecto fue desarrollado en IDE Eclipse + Spring Plugins
+			Autor: Rafael Talavera. Axioma Soluciones Integrales <br /> &copy; Company 2023
+			Inc. Todos los derechos reservados. Términos de uso y privacidad.<br />
+		</p>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Bootstrap JS -->
+		<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/jquery-ui.min.js}"></script>
+
+	</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header active" th:text="${titulo}"></div>
+
+			<!-- Si el campo 'foto' no es nulo y tiene contenido, mostrar la imagen cargada -->
+			<img th:if="${empleado.foto != null and empleado.foto.length() > 0}"
+				class="img-thumbnail rounded float-left" style="max-width: 15%;"
+				th:src="@{'/uploads/' + ${empleado.foto}}" th:alt="${empleado.foto}" />
+
+			<!-- Si el campo 'foto' es nulo o está vacío, mostrar la imagen por defecto -->
+			<img th:unless="${empleado.foto != null and empleado.foto.length() > 0}" th:src="@{/images/persona.ico}"
+				alt="Loco Persona" class="img-thumbnail rounded float-left" style="max-width: 10%;" />
+
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">DNI: </label>
+						<span class="ml-2" th:text="${empleado.dni}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Nombre: </label>
+						<span class="ml-2" th:text="${empleado.nombre}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Apellido: </label>
+						<span class="ml-2" th:text="${empleado.apellido}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Nacimiento: </label>
+						<span class="ml-2" th:text="${empleado.fechaNac}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Dirección: </label>
+						<span class="ml-2" th:text="${empleado.direccion}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Tel: </label>
+						<span class="ml-2" th:text="${empleado.tel}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Email: </label>
+						<span class="ml-2" th:text="${empleado.email}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Cargo: </label>
+						<span class="ml-2" th:text="${empleado.cargo}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+
+					<td><a class="btn btn-primary bts-ms" th:href="@{empleado/fotm/} + ${empleado.id}"
+							th:text="'Editar'"></a>
+					</td>
+					<td><a class="btn btn-danger bts-ms" th:href="@{empleado/eliminar/} + ${empleado.id}"
+							th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
+					</td>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

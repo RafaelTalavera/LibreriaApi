@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container mt-4">
+
+		<h1 class="text-danger" th:text="${titulo}"></h1>
+		<p><a class="btn btn-success btn-sm" th:href="@{/libro/form}">Crear libro</a></p>
+		
+		<table class="table table-striped border border-secundary">
+			<header>
+				<tr class="table-primary">
+					<th>isbn</th>
+					<th>Titulo</th>
+					<th>Autor</th>
+					<th>Año</th>
+					<th>Stock</th>
+					<th>precio</th>			
+					<th>Editorial</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					
+				</tr>
+			</header>
+			<tbody>
+				<tr th:each="libro: ${libros}">
+					<td th:text="${libro.isbn}"></td>
+					<td th:text="${libro.titulo}"></td>
+					<td th:text="${libro.autor}"></td>
+					<td th:text="${libro.anio}"></td>
+					<td th:text="${libro.stock}"></td>
+					<td th:text="${libro.precio}"></td>
+					<td th:text="${libro.edito}"></td>
+					<td><a class="btn btn-warning btn-sm" th:href="@{/libro/ver/} + ${libro.id}"
+					 th:text="'ver'"></a></td>
+					<td><a class="btn btn-primary btn-sm" th:href="@{/libro/form/} + ${libro.id}"
+					 th:text="'Editar'"></a></td>
+					<td><a class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}" th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a></td>				
+
+				</tr>
+
+			</tbody>
+		</table>
+		<nav th:replace="paginator-nav :: paginator"></nav>
+	</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+
+</html>

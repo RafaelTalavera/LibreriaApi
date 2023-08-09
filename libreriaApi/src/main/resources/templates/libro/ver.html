@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header active" th:text="${titulo}"></div>
+
+			<!-- Si el campo 'foto' no es nulo y tiene contenido, mostrar la imagen cargada -->
+			<img th:if="${libro.foto != null and libro.foto.length() > 0}" class="img-thumbnail rounded float-left"
+				style="max-width: 15%;" th:src="@{'/uploads/' + ${libro.foto}}" th:alt="${libro.foto}" />
+
+			<!-- Si el campo 'foto' es nulo o está vacío, mostrar la imagen por defecto -->
+			<img th:unless="${libro.foto != null and libro.foto.length() > 0}"
+				th:src="@{/images/book.ico}"
+				alt="Axioma Logo" class="img-thumbnail rounded float-left" style="max-width: 10%;" />
+
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">ISBN: </label>
+						<span class="ml-2" th:text="${libro.isbn}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Autor: </label>
+						<span class="ml-2" th:text="${libro.autor}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">AÑO: </label>
+						<span class="ml-2" th:text="${libro.anio}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Editorial: </label>
+						<span class="ml-2" th:text="${libro.edito}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Stock: </label>
+						<span class="ml-2" th:text="${libro.stock}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Precio: $ </label>
+						<span class="ml-2" th:text="${libro.precio}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+
+					<td><a class="btn btn-primary btn-sm" th:href="@{/libro/form/} + ${libro.id}" th:text="'Editar'"></a>
+					</td>
+					<td><a class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}" th:text="'eliminar'"
+							onclick="return confirm ('Estas seguro que quieres Eliminar');"></a></td>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

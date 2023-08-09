@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			
+			<div class="card-header" th:text="${titulo}"></div>
+
+			<img th:src="@{/images/cliente.ico}" alt="cliente" class="img-thumbnail rounded float-left mx-4 my-2"
+				style="max-width: 10%;" />
+
+			<h4 class="card-title mx-2 my-2 "> <a class="btn btn-success btn-sm" th:href="@{/factura/form/} + ${cliente.id}"
+					th:text="'Facturar'"></a></h4>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">ID: </label>
+						<span class="ml-2" th:text="${cliente.id}"></span>
+					</div>
+				</li>
+				
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">DNI: </label>
+						<span class="ml-2" th:text="${cliente.dni}"></span>
+					</div>
+
+
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Dirección: </label>
+						<span class="ml-2" th:text="${cliente.direccion}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Email: </label>
+						<span class="ml-2" th:text="${cliente.email}"></span>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="font-italic">
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Telefono: </label>
+						<span class="ml-2" th:text="${cliente.tel}"></span>
+					</div>
+				</li>
+
+				<li class="list-group-item">
+
+					<td><a class="btn btn-primary btn-ms" th:href="@{/cliente/form/} + ${cliente.id}"
+							th:text="'Editar'"></a>
+					</td>
+					<td><a class="btn btn-danger btn-ms" th:href="@{/cliente/eliminar/} + ${cliente.id}"
+							th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
+					</td>
+				</li>
+			</ul>
+
+			<div th:if="${#lists.isEmpty(cliente.facturas)}" class="alert alert-info my-4"
+				th:text="'No hay facturas par mostrar del cliente: ' + ${cliente.nombre} + '  ' + ${cliente.apellido}">
+			</div>
+
+			<table th:if="${not #lists.isEmpty(cliente.facturas)}" class="table table-bordered table-striped my-4">
+				<thead clas="thead-inverse">
+					<tr>
+						<th>Folio</th>
+						<th>Descripción</th>
+						<th>fecha</th>
+						<th>total</th>
+						<th>Vendedor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="factura:${cliente.facturas}">
+						<td th:tex="${factura.id}"></td>
+						<td th:tex="${factura.descripcion}"></td>
+						<td th:tex="${factura.createAt}"></td>
+						<td th:tex="${factura.total}"></td>
+						<td th:tex="${factura.empleado.nombre}"></td>
+
+
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+	</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

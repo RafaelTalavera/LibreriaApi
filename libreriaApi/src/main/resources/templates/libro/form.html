@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<h1 class="text-success" th:text="${titulo}"></h1>
+
+		<form th:action="@{libro/form}" th:object="${libro}" method="post" enctype="multipart/form-data">
+
+			<div class="card bg-light text-dark mb-3">
+				<div class="card-body">
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">ISBN</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{isbn}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('isbn')}"
+								th:errors="*{isbn}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Título</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{titulo}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('titulo')}"
+								th:errors="*{titulo}"></small>
+						</div>
+					</div>
+
+				<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Autor</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{autor}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('autor')}"
+								th:errors="*{autor}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Año</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{anio}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('anio')}"
+								th:errors="*{anio}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Editorial</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{edito}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('edito')}"
+								th:errors="*{edito}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Precio</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{precio}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}"
+								th:errors="*{precio}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Stock</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{stock}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('stock')}"
+								th:errors="*{stock}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="file" class="col-sm-2 col-form-label">Foto</label>
+						<div class="col-sm-6">
+							<input type="file" name="file" class="form-control" />
+						</div>
+					</div>
+
+					<div class="container mt-3">
+						<div class="container">
+							<div class="col-sm-6">
+								<input type="submit" value="Crear Libro" class="btn btn-primary btn-sm" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<input type="hidden" th:field="*{id}" />
+
+		</form>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>
+Co

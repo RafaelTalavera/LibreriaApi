@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<h3> Ha ocurrido un error </h3>
+	
+	<div th:text="${message}"></div>
+	
+
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>
