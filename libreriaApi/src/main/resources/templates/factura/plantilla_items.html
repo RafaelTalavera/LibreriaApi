@@ -8,13 +8,19 @@
 		<tbody id="plantillaItemsFactura">
 			<tr id="row_{ID}">
 				<td class="d-none"><input type="hidden" value="{ID}" name="item_id[]"></td>
-				<th >Titulo</th>
-				<td >{AUTOR}</td>
-				<td >{EDITO}</td>
-				<td >{ANIO}</td>
-				<td >{PRECIO}</td>
-				<td >{STOCK}</td>
-				<td> <input class=" form-control col-sm-4 small" type="number" value="1" name="cantidad[]" id="cantidad{ID}"  />
+				<th>{TITULO}</th>
+				<td>{AUTOR}</td>
+				<td>{EDITO}</td>
+				<td>{STOCK}</td>
+				<td>{PRECIO}</td>
+				<td>
+					<input type="number" value="1" name="cantidad[]" id="cantidad{ID}"
+						class="form-control col-sm-4 small" data-stock="{STOCK}"
+						onchange="itemsHelper.calcularImporte({ID}, {PRECIO}, this.value);"
+						oninput="itemsHelper.validarStock({ID}, this.value, {STOCK});" />
+				</td>
+				<td><span id="total_importe_{ID}">0</span></td>
+				<td><a href="#" class="btn btn-danger btn-sm" onclick="itemsHelper.eliminarLineaFactura({ID});">x</a>
 				</td>
 
 			</tr>

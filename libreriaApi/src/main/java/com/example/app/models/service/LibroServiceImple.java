@@ -36,7 +36,6 @@ public class LibroServiceImple implements ILibroService {
 	@Transactional(readOnly=true)
 	@Override
 	public Libro findOne(Long id) {
-		
 		return ilibroDao.findById(id).orElse(null);
 	}
 	
@@ -54,11 +53,6 @@ public class LibroServiceImple implements ILibroService {
 		return ilibroDao.findAll(pageable);
 	}
 
-	@Transactional(readOnly=true)
-	@Override
-	public List<Libro> finByNombre(String term) {
-		// TODO Auto-generated method stub
-		return ilibroDao.findByNombre(term);
-	}
+
 
 }

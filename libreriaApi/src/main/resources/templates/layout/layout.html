@@ -7,6 +7,7 @@
 	<title th:text="${titulo}"></title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 	<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/styles.css}" />
 
 </head>
 
@@ -15,7 +16,7 @@
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand text-white" href="#">Axioma</a>
+				<a class="navbar-brand text-orange" href="#">Axioma</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -27,16 +28,16 @@
 						</li>
 						<li class="nav-item">
 
-							<a class="nav-link text-white" th:href="@{/listar_factura}">Facturas</a>
+							<a class="nav-link text-white" th:href="@{/listar-factura}">Facturas</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" th:href="@{/listar_cliente}">Clientes</a>
+							<a class="nav-link text-white" th:href="@{/listar-cliente}">Clientes</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" th:href="@{/listar_libro}">Libros</a>
+							<a class="nav-link text-white" th:href="@{/listar-libro}">Libros</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" th:href="@{/listar_empleado}">Empleados</a>
+							<a class="nav-link text-white" th:href="@{/listar-empleado}">vendedores</a>
 						</li>
 					</ul>
 				</div>
@@ -51,6 +52,8 @@
 			<div th:if="${#fields.hasErrors('dni')}" class="alert alert-danger" role="alert">
 				<p th:each="error : ${#fields.errors('dni')}" th:text="${error}"> DNI duplicado</p>
 			</div>
+
+
 
 	</header>
 

@@ -57,7 +57,6 @@ public class Factura implements Serializable {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-
 	
 	@PrePersist
 	public void prePersist() {

@@ -77,22 +77,22 @@ public class EmpleadoController {
 		}
 
 		model.put("empleado", empleado);
-		model.put("titulo", "Detalle Empleado: " + empleado.getNombre() + " " + empleado.getApellido());
+		model.put("titulo", "Detalle del Empleado: " + empleado.getNombre() + " " + empleado.getApellido());
 		return "/empleado/ver";
 	}
 
-	@RequestMapping(value = "/listar_empleado", method = RequestMethod.GET)
+	@RequestMapping(value = "/listar-empleado", method = RequestMethod.GET)
 	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
 		
 		Page<Empleado> empleados = empleadoService.findALL(pageRequest);
 		
-		PageRender<Empleado> pageRender = new PageRender<Empleado>("/listar_empleado", empleados);
+		PageRender<Empleado> pageRender = new PageRender<Empleado>("/listar-empleado", empleados);
 		model.addAttribute("titulo", "Listado de Empleados");
 		model.addAttribute("empleados", empleados);
 		model.addAttribute("page", pageRender);
-		return "/listar_empleado";
+		return "/listar-empleado";
 	}
 
 	@RequestMapping(value = "/empleado/form")
@@ -101,10 +101,10 @@ public class EmpleadoController {
 		Empleado empleado = new Empleado();
 		model.put("empleado", empleado);
 		model.put("titulo", "Formulario de Empleado");
-		return "/empleado/form";
+		return "empleado/form";
 	}
 
-	@RequestMapping(value = "/empleado/form/{id}")
+	@RequestMapping(value = "empleado/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
 		Empleado empleado = null;
@@ -114,18 +114,18 @@ public class EmpleadoController {
 			empleado = empleadoService.findOne(id);
 			if (empleado == null) {
 				flash.addFlashAttribute("error", "El ID del Empleado no existe en la BBDD!");
-				return "redirect:/listar_empleado";
+				return "redirect:/listar-empleado";
 			}
 		} else {
 			flash.addFlashAttribute("error", "El ISBN del libro no puede ser cero!");
-			return "redirect:/listar_empleado";
+			return "redirect:/listar-empleado";
 		}
 		model.put("Empleado", empleado);
 		model.put("titulo", "Editar Empleado");
-		return "/empleado/form";
+		return "empleado/form";
 	}
 
-	@RequestMapping(value = "/empleado/form", method = RequestMethod.POST)
+	@RequestMapping(value = "empleado/form", method = RequestMethod.POST)
 	public String guardar(@Valid Empleado empleado, BindingResult result, Model model, 
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
 		
@@ -179,7 +179,7 @@ public class EmpleadoController {
 		empleadoService.save(empleado);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/listar_empleado";
+		return "redirect:/listar-empleado";
 	}
 
 	@RequestMapping(value = "/empleado/eliminar/{id}")
@@ -189,7 +189,7 @@ public class EmpleadoController {
 	        Empleado empleado = empleadoService.findOne(id);
 	        if (empleado == null) {
 	            flash.addFlashAttribute("error", "El empleado no existe en la base de datos");
-	            return "redirect:/listar_empleado";
+	            return "redirect:/listar-empleado";
 	        }
 
 	        // Eliminar el empleado de la base de datos
@@ -210,7 +210,7 @@ public class EmpleadoController {
 	    } else {
 	        flash.addFlashAttribute("error", "El Id del empleado no puede ser cero!");
 	    }
-	    return "redirect:/listar_empleado";
+	    return "redirect:/listar-empleado";
 	}
 
 

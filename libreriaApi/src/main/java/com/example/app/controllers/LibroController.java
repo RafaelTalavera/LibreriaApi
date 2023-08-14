@@ -75,7 +75,7 @@ public class LibroController {
 		Libro libro = libroService.findOne(id);
 		if (libro == null) {
 			flash.addFlashAttribute("error", "El libro no existe en la base de datos");
-			return "redirect:libro/listar_libro";
+			return "redirect:/listar_libro";
 		}
 
 		model.put("libro", libro);
@@ -83,18 +83,18 @@ public class LibroController {
 		return "libro/ver";
 	}
 
-	@RequestMapping(value = "/listar_libro", method = RequestMethod.GET)
+	@RequestMapping(value = "/listar-libro", method = RequestMethod.GET)
 	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model) {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
 		
 		Page<Libro> libros = libroService.findALL(pageRequest);
 		
-		PageRender<Libro> pageRender = new PageRender<Libro>("/listar_libro", libros);
+		PageRender<Libro> pageRender = new PageRender<>("/listar_libro", libros);
 		model.addAttribute("titulo", "Listado de libros");
 		model.addAttribute("libros", libros);
 		model.addAttribute("page", pageRender);
-		return "/listar_libro";
+		return "/listar-libro";
 	}
 
 	@RequestMapping(value = "libro/form")
@@ -116,11 +116,11 @@ public class LibroController {
 			libro = libroService.findOne(id);
 			if (libro == null) {
 				flash.addFlashAttribute("error", "El ISBN del libro no existe en la BBDD!");
-				return "redirect:libro/listar_libro";
+				return "redirect:listar-libro";
 			}
 		} else {
 			flash.addFlashAttribute("error", "El ISBN del libro no puede ser cero!");
-			return "redirect:libro/listar_libro";
+			return "redirect:listar-libro";
 		}
 		model.put("libro", libro);
 		model.put("titulo", "Editar Libro");
@@ -184,17 +184,17 @@ public class LibroController {
 		libroService.save(libro);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:libro/listar_libro";
+		return "redirect:/listar-libro";
 	}
 
-	@RequestMapping(value = "libro/eliminar/{id}")
+	@RequestMapping(value = "/libro/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 
 	    if (id > 0) {
 	        Libro libro = libroService.findOne(id);
 	        if (libro == null) {
 	            flash.addFlashAttribute("error", "El libro no existe en la base de datos");
-	            return "redirect:/listar_libro";
+	            return "redirect:/listar-libro";
 	        }
 
 	        // Eliminar el libro de la base de datos
@@ -215,7 +215,7 @@ public class LibroController {
 	    } else {
 	        flash.addFlashAttribute("error", "El ISBN del libro no puede ser cero!");
 	    }
-	    return "redirect:libro/listar_libro";
+	    return "redirect:/listar-libro";
 	}
 
 

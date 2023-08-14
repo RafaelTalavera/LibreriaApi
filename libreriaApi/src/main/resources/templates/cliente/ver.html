@@ -7,14 +7,12 @@
 
 	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container py-4">
+	<div class="container py-4 small">
 
 		<div class="card bg-light">
 			
 			<div class="card-header" th:text="${titulo}"></div>
 
-			<img th:src="@{/images/cliente.ico}" alt="cliente" class="img-thumbnail rounded float-left mx-4 my-2"
-				style="max-width: 10%;" />
 
 			<h4 class="card-title mx-2 my-2 "> <a class="btn btn-success btn-sm" th:href="@{/factura/form/} + ${cliente.id}"
 					th:text="'Facturar'"></a></h4>
@@ -68,30 +66,31 @@
 				th:text="'No hay facturas par mostrar del cliente: ' + ${cliente.nombre} + '  ' + ${cliente.apellido}">
 			</div>
 
-			<table th:if="${not #lists.isEmpty(cliente.facturas)}" class="table table-bordered table-striped my-4">
-				<thead clas="thead-inverse">
-					<tr>
-						<th>Folio</th>
-						<th>Descripción</th>
-						<th>fecha</th>
-						<th>total</th>
-						<th>Vendedor</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="factura:${cliente.facturas}">
-						<td th:tex="${factura.id}"></td>
-						<td th:tex="${factura.descripcion}"></td>
-						<td th:tex="${factura.createAt}"></td>
-						<td th:tex="${factura.total}"></td>
-						<td th:tex="${factura.empleado.nombre}"></td>
+			<div class="table-responsive">
+				<table th:if="${not #lists.isEmpty(cliente.facturas)}" class="table table-bordered table-striped my-4">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Folio</th>
+							<th>Descripción</th>
+							<th>fecha</th>
+							<th>total</th>
+							
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:each="factura: ${cliente.facturas}">
+							<td th:text="${factura.id}"></td>
+							<td th:text="${factura.descripcion}"></td>
+							<td th:text="${factura.createAt}"></td>
+							<td th:text="${factura.total}"></td>
 
 
-					</tr>
+						</tr>
 
-				</tbody>
+					</tbody>
 
-			</table>
+				</table>
+			</div>
 
 		</div>
 	</div>

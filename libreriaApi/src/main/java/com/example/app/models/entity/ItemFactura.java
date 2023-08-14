@@ -49,4 +49,13 @@ public class ItemFactura implements Serializable {
 		return cantidad.doubleValue()*libro.getPrecio();
 	}
 
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+	
 }

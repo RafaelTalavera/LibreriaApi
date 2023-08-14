@@ -18,6 +18,6 @@ public interface ILibroService {
 	
 	public void delete(Long id);
 	
-	public List<Libro> finByNombre(String term);
+	
 }
 

@@ -9,7 +9,7 @@ import com.example.app.models.entity.Libro;
 
 public interface ILibroDao extends PagingAndSortingRepository<Libro, Long>, CrudRepository<Libro, Long>{
 	
-	@Query("select a from Libro a where a.autor like %?1%")
+	@Query("select a from Libro a where a.titulo like %?1%")
 	public List<Libro> findByNombre(String term);
 	
 }

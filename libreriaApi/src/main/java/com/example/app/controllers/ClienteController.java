@@ -21,27 +21,29 @@ import com.example.app.models.service.IClienteService;
 import com.example.app.util.paginator.PageRender;
 import jakarta.validation.Valid;
 
-
+/***/
 
 @Controller
 @SessionAttributes("cliente") 
 public class ClienteController {
 	
+	
+	
 	@Autowired
 	private IClienteService clienteService;
 	
-	@RequestMapping(value = "/listar_cliente", method=RequestMethod.GET)
+	@RequestMapping(value = "/listar-cliente", method=RequestMethod.GET)
 	public String listar (@RequestParam(name="page", defaultValue="0") int page, Model model) {
 
 	 Pageable pageRequest = PageRequest.of(page, 4);
 	 Page<Cliente> clientes = clienteService.findALL(pageRequest);
-	 PageRender<Cliente> pageRender = new PageRender<>("/listar_cliente", clientes);
+	 PageRender<Cliente> pageRender = new PageRender<>("/listar-cliente", clientes);
 	 
      model.addAttribute("titulo", "Litado de clientes");
      model.addAttribute("clientes", clientes);
      model.addAttribute("page",pageRender);
      
-     return "/listar_cliente";
+     return "/listar-cliente";
 	}
 	
 	@GetMapping(value = "cliente/ver/{id}")
@@ -50,7 +52,7 @@ public class ClienteController {
 		Cliente cliente = clienteService.findOne(id);
 		if (cliente == null) {
 			flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
-			return "redirect:/listar_cliente";
+			return "redirect:/listar-cliente";
 		}
 
 		model.put("cliente", cliente);
@@ -77,11 +79,11 @@ public class ClienteController {
 			cliente = clienteService.findOne(id);
 			if(cliente == null) {
 			flash.addFlashAttribute("error","El ID del cliente no existe en la BBDD!");
-			return "redirect:listar";
+			return "redirect:listar-cliente";
 			}
 		} else {
 			flash.addFlashAttribute("error", "El id del libro no puede ser 0 ");
-			return "redirect:listar_cliente";
+			return "redirect:listar-cliente";
 		}
 		
 		model.put("cliente", cliente);
@@ -102,7 +104,7 @@ public class ClienteController {
 	    clienteService.save(cliente);
 	    status.setComplete();
 	    flash.addFlashAttribute("success", "Cliente creado con éxito");
-	    return "redirect:listar_cliente";
+	    return "redirect:/listar-cliente";
 	}
 
 	
@@ -114,7 +116,7 @@ public class ClienteController {
 			flash.addFlashAttribute("success", "Cliente eliminado con éxito");
 		}
 		
-		return "redirect:listar_cliente";
+		return "redirect:listar-cliente";
 	}
 	
 }

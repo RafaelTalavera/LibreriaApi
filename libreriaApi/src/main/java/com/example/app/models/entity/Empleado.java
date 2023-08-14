@@ -45,7 +45,7 @@ public class Empleado implements Serializable {
 	@NotNull
 	@Column(name = "fecha_nac")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date fechaNac;
 
 	@NotEmpty
@@ -161,8 +161,6 @@ public class Empleado implements Serializable {
 		this.facturas = facturas;
 	}
 	
-	
-
 	private static final long serialVersionUID = 1L;
 
 
