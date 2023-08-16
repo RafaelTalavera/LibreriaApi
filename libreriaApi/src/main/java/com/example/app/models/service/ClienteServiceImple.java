@@ -61,7 +61,7 @@ public class ClienteServiceImple implements IClienteService {
 	}
 
 	@Override
-	public Cliente findByDni(Integer dni) {
+	public Cliente findByDni(String dni) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -86,6 +86,15 @@ public class ClienteServiceImple implements IClienteService {
 		facturaDao.save(factura);
 		
 	}
+
+	@Transactional
+	@Override
+	public List<String> findDniSuggestions(String term) {
+		// TODO Auto-generated method stub
+		return clienteDao.findDniSuggestionsByTerm(term);
+	}
+
+
 
 
 }

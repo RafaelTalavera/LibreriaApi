@@ -25,6 +25,19 @@ public class ItemFactura implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="libro_id")
 	private Libro libro;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "factura_id")
+	private Factura factura;
+
+
+	public Factura getFactura() {
+		return factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
 
 	private static final long serialVersionUID = 1L;
 

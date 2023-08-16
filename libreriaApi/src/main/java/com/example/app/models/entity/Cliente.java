@@ -29,9 +29,9 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @NotNull
+	@NotEmpty
     @Column(unique = true)
-    private Integer dni;
+    private String dni;
 
 	@NotEmpty
 	private String nombre;
@@ -59,11 +59,11 @@ public class Cliente implements Serializable {
 		facturas = new ArrayList<Factura>();
 	}
 
-	public Integer getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Integer dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 

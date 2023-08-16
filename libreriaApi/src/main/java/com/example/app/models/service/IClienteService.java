@@ -21,14 +21,15 @@ public interface IClienteService {
 	
 	public void delete(Long id);
 
-	public Cliente findByDni(Integer dni);
+	public Cliente findByDni(String dni);
 	
 	public List<Libro> finByNombre(String term);
 	
 	public Libro findLibroById(Long id);
 	
 	public void saveFactura(Factura factura);
-	
+
+	public List<String> findDniSuggestions(String term);
 	
 
 

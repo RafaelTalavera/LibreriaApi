@@ -32,15 +32,13 @@ public class Empleado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+	@NotEmpty
 	@Column(unique = true)
-	private Long dni;
+	private String dni;
 
 	@NotEmpty
 	private String nombre;
 
-	@NotEmpty
-	private String apellido;
 
 	@NotNull
 	@Column(name = "fecha_nac")
@@ -81,11 +79,11 @@ public class Empleado implements Serializable {
 		this.id = id;
 	}
 
-	public Long getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Long dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
@@ -97,13 +95,6 @@ public class Empleado implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
 
 	public Date getFechaNac() {
 		return fechaNac;

@@ -27,6 +27,7 @@ import com.example.app.models.entity.ItemFactura;
 import com.example.app.models.entity.Libro;
 import com.example.app.models.service.IClienteService;
 import com.example.app.models.service.IFacturaService;
+import com.example.app.models.service.ILibroService;
 import com.example.app.util.paginator.PageRender;
 
 
@@ -41,9 +42,31 @@ public class FacturaController {
 	@Autowired
 	private IFacturaService facturaService;
 	
+	@Autowired
+	private ILibroService libroService;
+	
 
 	
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	
+	@GetMapping("/factura/ver/{id}")
+	public String ver(@PathVariable(value="id") Long id, 
+			Model model,
+			RedirectAttributes flash) {
+		Factura factura = facturaService.findOne(id);
+		
+		if(factura == null) {
+			flash.addFlashAttribute("error", "La factura no existe en la base de datos!");
+			return "redirect:/listar-factura";
+		}
+		
+		model.addAttribute("factura", factura);
+		model.addAttribute("titulo", "Factura: ".concat(factura.getDescripcion()));
+		model.addAttribute("items", factura.getItems());
+		
+		return "factura/ver";
+	}
 	
 	
 	@GetMapping("/factura/form/{clienteId}")
@@ -80,16 +103,20 @@ public class FacturaController {
 	        RedirectAttributes flash, SessionStatus status) {
 
 	    for (int i = 0; i < itemId.length; i++) {
-
 	        Libro libro = clienteService.findLibroById(itemId[i]);
-
 	        ItemFactura linea = new ItemFactura();
 	        linea.setCantidad(cantidad[i]);
 	        linea.setLibro(libro);
 	        factura.addItemFactura(linea);
 
 	        log.info("ID:" + itemId[i].toString() + ", cantidad: " + cantidad[i].toString());
-	      
+	    }
+
+	    // Restar el stock de libros
+	    for (ItemFactura item : factura.getItems()) {
+	        Libro libro = item.getLibro();
+	        libro.setStock(libro.getStock() - item.getCantidad());
+	        libroService.save(libro); // Actualizar el libro en la base de datos
 	    }
 
 	    clienteService.saveFactura(factura);
@@ -100,6 +127,7 @@ public class FacturaController {
 
 	    return "redirect:/cliente/ver/" + factura.getCliente().getId();
 	}
+
 	
 	@RequestMapping(value = "/listar-factura", method = RequestMethod.GET)
 	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model) {
@@ -113,6 +141,22 @@ public class FacturaController {
 		model.addAttribute("facturas", facturas);
 		model.addAttribute("page", pageRender);
 		return "listar-factura";
+	}
+	
+	@GetMapping("/factura/eliminar/{id}")
+	public String eliminar(@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		
+		Factura factura = facturaService.findOne(id);
+		
+		if(factura != null) {
+			facturaService.delete(id);
+			flash.addFlashAttribute("success", "Factura eliminada con éxito!");
+			return "redirect:/factura/ver/" + factura.getCliente().getId();
+		}
+		
+		flash.addFlashAttribute("error", "La fctura no se encuenta en la base de datos");
+		
+		return"redirect:/listar-factura";
 	}
 	
 }

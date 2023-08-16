@@ -97,26 +97,26 @@ INSERT INTO libros (isbn, titulo, autor, anio, stock, precio, edito, foto) VALUE
 
 /* Populate tables empleados*/
 
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1892887', 'Alberto', 'Fernandez', '1978-04-19', 'Las camelias', '24587788', 'rttttttt@llli.com', 'Ventas', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1273456', 'Ana', 'García', '1990-08-12', 'Calle del Sol', '12345678', 'ana.garcia@email.com', 'Gerente', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('9857654', 'Carlos', 'Martínez', '1985-03-25', 'Avenida Central', '87654321', 'carlos.martinez@email.com', 'Desarrollador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('3457678', 'María', 'López', '1992-11-02', 'Calle Mayor', '45678901', 'maria.lopez@email.com', 'Contador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5676890', 'Javier', 'Rodríguez', '1988-06-15', 'Avenida del Parque', '23456789', 'javier.rodriguez@email.com', 'Marketing', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2344567', 'Laura', 'Pérez', '1994-02-08', 'Calle de la Luna', '34567890', 'laura.perez@email.com', 'Recursos Humanos', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('6785901', 'Andrés', 'Hernández', '1987-09-30', 'Avenida Principal', '45678912', 'andres.hernandez@email.com', 'Ventas', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('3456612', 'Ana', 'Fernández', '1991-07-18', 'Calle de los Pinos', '56789123', 'ana.fernandez@email.com', 'Desarrollador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5678534', 'Sergio', 'Gómez', '1986-12-04', 'Avenida Central', '67891234', 'sergio.gomez@email.com', 'Gerente', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2342512', 'Laura', 'Martín', '1993-05-20', 'Calle del Río', '78912345', 'laura.martin@email.com', 'Contador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5678456', 'Diego', 'Gutiérrez', '1989-10-10', 'Avenida del Sol', '89123456', 'diego.gutierrez@email.com', 'Marketing', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1235367', 'Luisa', 'Sánchez', '1995-01-28', 'Calle Mayor', '90123456', 'luisa.sanchez@email.com', 'Recursos Humanos', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('8901423', 'Eduardo', 'Ramírez', '1984-11-11', 'Avenida Principal', '12345678', 'eduardo.ramirez@email.com', 'Ventas', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('4567589', 'Mónica', 'Díaz', '1990-09-05', 'Calle del Bosque', '23456789', 'monica.diaz@email.com', 'Desarrollador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('7894712', 'Pedro', 'Luna', '1987-04-22', 'Avenida Central', '34567890', 'pedro.luna@email.com', 'Gerente', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('234567', 'Jorge', 'Ortega', '1994-08-15', 'Calle de la Montaña', '45678901', 'jorge.ortega@email.com', 'Contador', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('567890', 'Ana', 'Cruz', '1988-03-29', 'Avenida del Río', '56789012', 'ana.cruz@email.com', 'Marketing', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2384567', 'Ricardo', 'Vargas', '1992-12-01', 'Calle del Puente', '67890123', 'ricardo.vargas@email.com', 'Recursos Humanos', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('4563789', 'María', 'Mendoza', '1986-06-18', 'Avenida Principal', '78901234', 'maria.mendoza@email.com', 'Ventas', '');
-INSERT INTO empleados(dni, nombre, apellido, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('7859012', 'Roberto', 'Navarro', '1991-02-03', 'Calle del Sol', '89012345', 'roberto.navarro@email.com', 'Desarrollador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1892887', 'Alberto Fernandez', '1978-04-19', 'Las camelias', '24587788', 'rttttttt@llli.com', 'Ventas', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1273456', 'Ana García', '1990-08-12', 'Calle del Sol', '12345678', 'ana.garcia@email.com', 'Gerente', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('9857654', 'Carlos Martínez', '1985-03-25', 'Avenida Central', '87654321', 'carlos.martinez@email.com', 'Desarrollador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('3457678', 'María López', '1992-11-02', 'Calle Mayor', '45678901', 'maria.lopez@email.com', 'Contador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5676890', 'Javier Rodríguez', '1988-06-15', 'Avenida del Parque', '23456789', 'javier.rodriguez@email.com', 'Marketing', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2344567', 'Laura Pérez', '1994-02-08', 'Calle de la Luna', '34567890', 'laura.perez@email.com', 'Recursos Humanos', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('6785901', 'Andrés Hernández', '1987-09-30', 'Avenida Principal', '45678912', 'andres.hernandez@email.com', 'Ventas', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('3456612', 'Ana Fernández', '1991-07-18', 'Calle de los Pinos', '56789123', 'ana.fernandez@email.com', 'Desarrollador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5678534', 'Sergio Gómez', '1986-12-04', 'Avenida Central', '67891234', 'sergio.gomez@email.com', 'Gerente', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2342512', 'Laura Martín', '1993-05 -20', 'Calle del Río', '78912345', 'laura.martin@email.com', 'Contador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('5678456', 'Diego Gutiérrez', '1989-10-10', 'Avenida del Sol', '89123456', 'diego.gutierrez@email.com', 'Marketing', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('1235367', 'Luisa Sánchez', '1995-01-28', 'Calle Mayor', '90123456', 'luisa.sanchez@email.com', 'Recursos Humanos', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('8901423', 'Eduardo Ramírez', '1984-11-11', 'Avenida Principal', '12345678', 'eduardo.ramirez@email.com', 'Ventas', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('4567589', 'Mónica Díaz', '1990-09-05', 'Calle del Bosque', '23456789', 'monica.diaz@email.com', 'Desarrollador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('7894712', 'Pedro Luna', '1987-04-22', 'Avenida Central', '34567890', 'pedro.luna@email.com', 'Gerente', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('234567', 'Jorge Ortega', '1994-08-15', 'Calle de la Montaña', '45678901', 'jorge.ortega@email.com', 'Contador', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('567890', 'Ana Cruz', '1988-03-29', 'Avenida del Río', '56789012', 'ana.cruz@email.com', 'Marketing', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('2384567', 'Ricardo Vargas', '1992-12-01', 'Calle del Puente', '67890123', 'ricardo.vargas@email.com', 'Recursos Humanos', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('4563789', 'María Mendoza', '1986-06-18', 'Avenida Principal', '78901234', 'maria.mendoza@email.com', 'Ventas', '');
+INSERT INTO empleados(dni, nombre, fecha_nac, direccion, tel, email, cargo, foto) VALUES ('7859012', 'Roberto Navarro', '1991-02-03', 'Calle del Sol', '89012345', 'roberto.navarro@email.com', 'Desarrollador', '');
 
 /* Populate tables facturas*/
  INSERT INTO facturas (fecha_alta, cliente_id, empleado_id, descripcion, observacion) VALUES ('2023-08-11', 1, 1, 'Descripción de la factura', 'Observaciones adicionales');

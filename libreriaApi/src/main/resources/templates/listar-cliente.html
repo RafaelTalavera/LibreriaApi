@@ -1,37 +1,45 @@
 <!DOCTYPE html>
-<html html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+
+</head>
 
 <body>
-
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container mt-4">
+		<div class="form-group">
+			<a class="btn btn-success btn-sm" th:href="@{/cliente/form}">Crear Cliente</a>
+		</div>
 
-		<h1 class="text-danger container text-center" th:text="${titulo}"></h1>
-		<p><a class="btn btn-success btn-sm" th:href="@{/cliente/form}">Crear Cliente</a></p>
+		<form class="form-inline mb-4" th:action="@{/buscar}" method="get">
+			<div class="form-group">
+				<input type="text" class="form-control" id="apellidoBusquedaCliente" name="apellidoBusquedaCliente"
+					placeholder="Buscar por Apellido">
+			</div>
+		</form>
 
-		<table class="table border border-secundary table-hover container text-center">
-			<header>
+		<div class="container mt-4">
+			<h1 class="text-danger container text-center" th:text="${titulo}"></h1>
+		</div>
+		<table class="table border border-secundary table-hover container text-center" id="clientesTable">
+			<thead>
 				<tr class="table-primary">
-
 					<th>DNI</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Direccion</th>
-					<th>email</th>
-					<th>tel</th>
+					<th>Email</th>
+					<th>Teléfono</th>
 					<th></th>
 					<th></th>
 					<th></th>
 					<th></th>
-
 				</tr>
-			</header>
+			</thead>
 			<tbody>
-				<tr th:each="cliente: ${clientes}">
-
+				<tr class="container text-center" th:each="cliente: ${clientes}">
 					<td th:text="${cliente.dni}"></td>
 					<td th:text="${cliente.nombre}"></td>
 					<td th:text="${cliente.apellido}"></td>
@@ -47,16 +55,57 @@
 					<td><a class="btn btn-danger btn-sm" th:href="@{/cliente/eliminar/} + ${cliente.id}"
 							th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
 					</td>
-
 				</tr>
-
 			</tbody>
 		</table>
 		<nav th:replace="paginator-nav :: paginator"></nav>
 	</div>
-
 	<footer th:replace="layout/layout :: footer"></footer>
+	<!-- Agrega jQuery y jQuery UI Autocomplete -->
+ <script>
+        $(document).ready(function () {
+            var timeout; // Variable para controlar el retraso en la búsqueda
 
+            $('#apellidoBusquedaCliente').on('input', function () {
+                var searchTerm = $(this).val();
+
+                // Limpiar el timeout previo y establecer uno nuevo
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    if (searchTerm.length > 0) {
+                        buscarClientesPorApellido(searchTerm);
+                    } else {
+                        // No es necesario limpiar la tabla si el término de búsqueda es corto
+                    }
+                }, 500); // Establecer un retraso de 500 ms para evitar llamadas excesivas
+            });
+
+            function buscarClientesPorApellido(term) {
+                $.ajax({
+                    url: '/cliente/buscar-por-apellido/' + term,
+                    type: 'GET',
+                    success: function (data) {
+                        var clientesHtml = '';
+                        $.each(data, function (index, cliente) {
+                            clientesHtml += '<tr class="container text-center">';
+                            clientesHtml += '<td>' + cliente.dni + '</td>';
+                            clientesHtml += '<td>' + cliente.nombre + '</td>';
+                            clientesHtml += '<td>' + cliente.apellido + '</td>';
+                            clientesHtml += '<td>' + cliente.direccion + '</td>';
+                            clientesHtml += '<td>' + cliente.email + '</td>';
+                            clientesHtml += '<td>' + cliente.tel + '</td>';
+                            clientesHtml += '<td><a class="btn btn-warning btn-sm" href="/cliente/ver/' + cliente.id + '">ver</a></td>';
+                            clientesHtml += '<td><a class="btn btn-success btn-sm" href="/factura/form/' + cliente.id + '">Facturar</a></td>';
+                            clientesHtml += '<td><a class="btn btn-primary btn-sm" href="/cliente/form/' + cliente.id + '">Editar</a></td>';
+                            clientesHtml += '<td><a class="btn btn-danger btn-sm" href="/cliente/eliminar/' + cliente.id + '" onclick="return confirm(\'Estás seguro que quieres Eliminar\');">eliminar</a></td>';
+                            clientesHtml += '</tr>';
+                        });
+                        $('#clientesTable tbody').html(clientesHtml);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

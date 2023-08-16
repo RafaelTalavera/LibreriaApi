@@ -21,7 +21,7 @@
 					<th>Fecha</th>
 					<th>Cliente</th>
 					<th>Vendedor</th>
-					<th>Total</th>
+					<th>Importe $</th>
 
 
 
@@ -29,13 +29,13 @@
 			</header>
 			<tbody>
 				<tr th:each="factura : ${facturas}">
-
-					<td th:text="${factura.id}"></td>
+					<td><a class="btn btn-warning btn-sm" th:href="@{/factura/ver/} + ${factura.id}"
+							th:text="'ver'"></a></td>
 					<td th:text="${factura.descripcion}"></td>
 					<td th:text="${factura.observacion}"></td>
 					<td th:text="${factura.createAt}"></td>
 					<td th:text="${factura.cliente.nombre + ' ' + factura.cliente.apellido}"></td>
-					<td th:text="${factura.empleado.nombre + ' ' + factura.empleado.apellido}"></td>
+					<td th:text="${factura.empleado.nombre}"></td>
 					<td th:text="${factura.total}"></td>
 
 

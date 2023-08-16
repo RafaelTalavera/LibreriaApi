@@ -10,12 +10,12 @@
 	<div class="container py-4 small">
 
 		<div class="card bg-light">
-			
+
 			<div class="card-header" th:text="${titulo}"></div>
 
 
-			<h4 class="card-title mx-2 my-2 "> <a class="btn btn-success btn-sm" th:href="@{/factura/form/} + ${cliente.id}"
-					th:text="'Facturar'"></a></h4>
+			<h4 class="card-title mx-2 my-2 "> <a class="btn btn-success btn-sm"
+					th:href="@{/factura/form/} + ${cliente.id}" th:text="'Facturar'"></a></h4>
 			<ul class="list-group">
 				<li class="list-group-item">
 					<div class="font-italic">
@@ -23,7 +23,7 @@
 						<span class="ml-2" th:text="${cliente.id}"></span>
 					</div>
 				</li>
-				
+
 				<li class="list-group-item">
 					<div class="font-italic">
 						<label class="font-weight-bold text-dark bg-warning px-2 rounded">DNI: </label>
@@ -74,15 +74,23 @@
 							<th>Descripción</th>
 							<th>fecha</th>
 							<th>total</th>
-							
+							<th>ver</th>
+							<th>Eliminar</th>
+
 						</tr>
 					</thead>
-					<tbody >
+					<tbody>
 						<tr th:each="factura: ${cliente.facturas}">
 							<td th:text="${factura.id}"></td>
 							<td th:text="${factura.descripcion}"></td>
 							<td th:text="${factura.createAt}"></td>
 							<td th:text="${factura.total}"></td>
+							<td><a class="btn btn-primary btn-sm" th:href="@{'/factura/ver/' + ${factura.id}}"
+									th:text="'detalle'"></a></td>
+							<td><a class="btn btn-danger btn-sm" th:href="@{'/factura/eliminar/' + ${factura.id}}"
+									th:text="'eliminar'"
+									onclick="return confirm('¿Estás seguro de que deseas eliminar la factura?');">Eliminar</a>
+							</td>
 
 
 						</tr>

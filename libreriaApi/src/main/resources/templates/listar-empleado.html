@@ -16,8 +16,7 @@
 			<header>
 				<tr class="table-primary container text-center">
 					<th>DNI</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Nombre y apellido</th>
 					<th>Nacimiento</th>
 					<th>Dirección</th>
 					<th>Tel</th>
@@ -33,7 +32,6 @@
 				<tr class="container text-center text-xs" th:each="empleado: ${empleados}">
 					<td th:text="${empleado.dni}"></td>
 					<td th:text="${empleado.nombre}"></td>
-					<td th:text="${empleado.apellido}"></td>
 					<td th:text="${empleado.fechaNac}"></td>
 					<td th:text="${empleado.direccion}"></td>
 					<td th:text="${empleado.tel}"></td>

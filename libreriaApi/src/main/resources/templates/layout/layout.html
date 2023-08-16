@@ -14,6 +14,7 @@
 <body>
 
 	<header th:fragment="header">
+
 		<nav class="navbar navbar-expand-lg bg-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand text-orange" href="#">Axioma</a>
@@ -37,11 +38,13 @@
 							<a class="nav-link text-white" th:href="@{/listar-libro}">Libros</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" th:href="@{/listar-empleado}">vendedores</a>
+							<a class="nav-link text-white" th:href="@{/listar-empleado}">Vendedores</a>
 						</li>
 					</ul>
 				</div>
 			</div>
+
+
 		</nav>
 
 		<div class="alert amter-success" th:if="${success != null}" th:text="${success}"></div>

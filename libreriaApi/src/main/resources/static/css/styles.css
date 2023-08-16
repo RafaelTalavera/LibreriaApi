@@ -1,13 +1,1 @@
-@charset "UTF-8";
 
-/* Personalizar la tarjeta */
-.card.bg-light.text-dark.mb-3 {
-    border: 2px solid #ccc; /* Agrega un borde */
-    border-radius: 10px; /* Añade esquinas redondeadas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra */
-    padding: 20px; /* Añade espacio interno */
-}
-
-  .bg-custom-red {
-    background-color: red;
-  }
