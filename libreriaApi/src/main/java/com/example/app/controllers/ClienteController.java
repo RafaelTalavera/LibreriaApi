@@ -23,7 +23,6 @@ import com.example.app.models.service.IClienteService;
 import com.example.app.util.paginator.PageRender;
 import jakarta.validation.Valid;
 
-/***/
 
 @Controller
 @SessionAttributes("cliente")
@@ -32,7 +31,7 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteService;
 
-	@RequestMapping(value = "/listar-cliente", method = RequestMethod.GET)
+	@RequestMapping(value = {"/listar-cliente", "/"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 4);
@@ -119,13 +118,7 @@ public class ClienteController {
 		return "redirect:listar-cliente";
 	}
 
-	/*@GetMapping(value = "/cliente/buscar-por-dni/{term}, produces = { "application/json" }")
-	@ResponseBody
-	public List<Cliente> buscarClientesPorDNI(@PathVariable String term) {
-		List<Cliente> clientes = clienteService.findDniSuggestions(term);; // Cambia el método según tu servicio
-		return clientes;
-	}
-	*/
+
 	
 	@GetMapping("/cliente/buscar-por-dni-autocompletado")
 	@ResponseBody

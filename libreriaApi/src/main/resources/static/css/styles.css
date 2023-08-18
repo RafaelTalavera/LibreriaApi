@@ -1,1 +1,12 @@
-
+.sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100; /* Asegura que el menú esté en frente del contenido */
+            padding: 48px 0 0; /* Ajusta el padding según tu diseño */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #343a40;
+            color: white;
+            overflow-y: auto;
+        }
