@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,6 +56,7 @@ public class LibroController {
 
 	private final static String UPLOADS_FOLDER = "uploads";
 
+	
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 		Path pathFoto = Paths.get("uploads").resolve(filename).toAbsolutePath();
@@ -74,6 +76,7 @@ public class LibroController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
 				.body(recurso);
 	}
+	
 
 	@GetMapping(value = "libro/ver/{id}")
 	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
@@ -103,6 +106,7 @@ public class LibroController {
 		return "listar-libro";
 	}
 
+	
 	@RequestMapping(value = "libro/form")
 	public String crear(Map<String, Object> model) {
 
@@ -112,6 +116,7 @@ public class LibroController {
 		return "libro/form";
 	}
 
+	
 	@RequestMapping(value = "libro/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -132,6 +137,7 @@ public class LibroController {
 		model.put("titulo", "Editar Libro");
 		return "libro/form";
 	}
+
 
 	@RequestMapping(value = "libro/form", method = RequestMethod.POST)
 	public String guardar(@Valid Libro libro, BindingResult result, Model model,
@@ -192,6 +198,7 @@ public class LibroController {
 		return "redirect:/listar-libro";
 	}
 
+	
 	@RequestMapping(value = "/libro/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 

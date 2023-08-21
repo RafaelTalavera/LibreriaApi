@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec"http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/layout :: head">
 
@@ -10,7 +10,7 @@
 
 	<div class="container mt-4">
 		<div class="form-group">
-			<a class="btn btn-success btn-sm" th:href="@{/cliente/form}">Crear Cliente</a>
+			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/cliente/form}">Crear Cliente</a>
 		</div>
 
 		<form class="form-inline mb-4" th:action="@{/buscar}" method="get">
@@ -46,13 +46,13 @@
 					<td th:text="${cliente.direccion}"></td>
 					<td th:text="${cliente.email}"></td>
 					<td th:text="${cliente.tel}"></td>
-					<td><a class="btn btn-warning btn-sm" th:href="@{/cliente/ver/} + ${cliente.id}"
+					<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-warning btn-sm" th:href="@{/cliente/ver/} + ${cliente.id}"
 							th:text="'ver'"></a></td>
-					<td><a class="btn btn-success btn-sm" th:href="@{/factura/form/} + ${cliente.id}"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-success btn-sm" th:href="@{/factura/form/} + ${cliente.id}"
 							th:text="'Facturar'"></a></td>
-					<td><a class="btn btn-primary btn-sm" th:href="@{/cliente/form/} + ${cliente.id}"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm" th:href="@{/cliente/form/} + ${cliente.id}"
 							th:text="'Editar'"></a></td>
-					<td><a class="btn btn-danger btn-sm" th:href="@{/cliente/eliminar/} + ${cliente.id}"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-sm" th:href="@{/cliente/eliminar/} + ${cliente.id}"
 							th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
 					</td>
 				</tr>

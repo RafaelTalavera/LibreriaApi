@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec"http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/layout :: head">
  
@@ -12,7 +12,7 @@
     <div class="container mt-4">
 
         <div class="form-group">
-            <a class="btn btn-success btn-sm" th:href="@{/libro/form}">Crear libro</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/libro/form}">Crear libro</a>
         </div>
         <form class="form-inline mb-4" th:action="@{/buscar}" method="get">
             <div class="form-group">
@@ -52,9 +52,9 @@
                 <td th:text="${libro.edito}"></td>
                 <td><a class="btn btn-warning btn-sm" th:href="@{/libro/ver/__${libro.id}__}" th:text="'ver'"></a>
                 </td>
-                <td><a class="btn btn-primary btn-sm" th:href="@{/libro/form/__${libro.id}__}"
+                <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-sm" th:href="@{/libro/form/__${libro.id}__}"
                         th:text="'Editar'"></a></td>
-                <td><a class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}"
+                <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}"
                         th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
                 </td>
             </tr>

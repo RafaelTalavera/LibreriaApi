@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ import com.example.app.models.service.ILibroService;
 import com.example.app.util.paginator.PageRender;
 
 
-
+@Secured("ROL_ADMIN")
 @Controller
 @SessionAttributes("factura")
 public class FacturaController {
@@ -67,7 +68,8 @@ public class FacturaController {
 		
 		return "factura/ver";
 	}
-	
+
+
 	
 	@GetMapping("/factura/form/{clienteId}")
 	public String crear(@PathVariable("clienteId") Long clienteId, Model model,
@@ -142,6 +144,7 @@ public class FacturaController {
 		model.addAttribute("page", pageRender);
 		return "listar-factura";
 	}
+	
 	
 	@GetMapping("/factura/eliminar/{id}")
 	public String eliminar(@PathVariable(value="id") Long id, RedirectAttributes flash) {

@@ -73,10 +73,10 @@
 
 								<li class="list-group-item">
 
-									<td><a class="btn btn-primary btn-sm" th:href="@{/libro/form/} + ${libro.id}"
+									<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm" th:href="@{/libro/form/} + ${libro.id}"
 											th:text="'Editar'"></a>
 									</td>
-									<td><a class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}"
+									<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}"
 											th:text="'eliminar'"
 											onclick="return confirm ('Estas seguro que quieres Eliminar');"></a></td>
 								</li>

@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ import com.example.app.models.service.IEmpleadoService;
 import com.example.app.util.paginator.PageRender;
 import jakarta.validation.Valid;
 
+
 @Controller
 @SessionAttributes("empleado")
 public class EmpleadoController {
@@ -45,6 +47,7 @@ public class EmpleadoController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	private final static String UPLOADS_FOLDER = "uploads";
+
 
 	@GetMapping(value="/uploads/empleados/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
@@ -103,7 +106,8 @@ public class EmpleadoController {
 		model.put("titulo", "Formulario de Empleado");
 		return "empleado/form";
 	}
-
+	
+	
 	@RequestMapping(value = "empleado/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -124,6 +128,7 @@ public class EmpleadoController {
 		model.put("titulo", "Editar Empleado");
 		return "empleado/form";
 	}
+
 
 	@RequestMapping(value = "empleado/form", method = RequestMethod.POST)
 	public String guardar(@Valid Empleado empleado, BindingResult result, Model model, 
@@ -181,7 +186,8 @@ public class EmpleadoController {
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:/listar-empleado";
 	}
-
+	
+	
 	@RequestMapping(value = "/empleado/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 
