@@ -10,17 +10,17 @@
 	<div class="container mt-4">
 
 		<h1 class="text-danger container text-center" th:text="${titulo}"></h1>
-		<p><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/empleado/form}">Crear empleado</a></p>
+		<p><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/empleado/form}" th:text="#{text.empleado.listar.crear}">Crear empleado</a></p>
 		
 		<table class="table border border-secundary table-hover container text-center">
 			<header>
 				<tr class="table-primary container text-center">
-					<th>DNI</th>
-					<th>Nombre y apellido</th>
-					<th>Nacimiento</th>
-					<th>Dirección</th>
-					<th>Tel</th>
-					<th>Email</th>			
+					<th th:text="#{text.empleado.listar.dni}"></th>
+					<th th:text="#{text.empleado.listar.nombreYapellido}">Nombre y apellido</th>
+					<th th:text="#{text.empleado.listar.nacimiento}">Nacimiento</th>
+					<th th:text="#{text.empleado.listar.direccion}">Dirección</th>
+					<th th:text="#{text.empleado.listar.tel}">Tel</th>
+					<th th:text="#{text.empleado.listar.email}">Email</th>			
 					<th></th>
 					<th></th>
 					<th></th>
@@ -37,11 +37,11 @@
 					<td th:text="${empleado.tel}"></td>
 					<td th:text="${empleado.email}"></td>
 				    <td ><a class="btn btn-warning btn-sm" th:href="@{empleado/ver/} + ${empleado.id}" 
-				    th:text="'Ver'"></a></td>
+				    th:text="#{text.empleado.listar.ver}">></a></td>
 					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm" th:href="@{/empleado/form/} + ${empleado.id}"
-					th:text="'Editar'"></a></td>
+					th:text="#{text.empleado.listar.editar}">></a></td>
 					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-sm" th:href="@{empledo/eliminar/} + ${empleado.id}"
-					th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a></td>				
+					th:text="#{text.empleado.listar.eliminar}"> onclick="return confirm ('Estas seguro que quieres Eliminar');"></a></td>				
 
 				</tr>
 

@@ -6,11 +6,13 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -44,6 +46,9 @@ public class EmpleadoController {
 	@Autowired
 	private IEmpleadoService empleadoService;
 	
+	@Autowired
+	private MessageSource messageSource;
+	
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	private final static String UPLOADS_FOLDER = "uploads";
@@ -71,45 +76,46 @@ public class EmpleadoController {
 	
 
 	@GetMapping(value = "/empleado/ver/{id}")
-	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+	public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash,
+			Locale locale) {
 
 		Empleado empleado = empleadoService.findOne(id);
 		if (empleado == null) {
-			flash.addFlashAttribute("error", "El Empleado no existe en la base de datos");
+			flash.addFlashAttribute("error", messageSource.getMessage("text.empleado.flash.db.error", null, locale));
 			return "redirect:/listar_empleado";
 		}
 
 		model.put("empleado", empleado);
-		model.put("titulo", "Detalle del Empleado: " + empleado.getNombre());
+		model.put("titulo", messageSource.getMessage("text.empleado.ver.detalle", null, locale) + empleado.getNombre());
 		return "/empleado/ver";
 	}
 
 	@RequestMapping(value = "/listar-empleado", method = RequestMethod.GET)
-	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model) {
+	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model, Locale locale) {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
 		
 		Page<Empleado> empleados = empleadoService.findALL(pageRequest);
 		
 		PageRender<Empleado> pageRender = new PageRender<Empleado>("/listar-empleado", empleados);
-		model.addAttribute("titulo", "Listado de Empleados");
+		model.addAttribute("titulo", messageSource.getMessage("text.empleado.listar.titulo", null, locale));
 		model.addAttribute("empleados", empleados);
 		model.addAttribute("page", pageRender);
 		return "/listar-empleado";
 	}
 
 	@RequestMapping(value = "/empleado/form")
-	public String crear(Map<String, Object> model) {
+	public String crear(Map<String, Object> model, Locale locale) {
 
 		Empleado empleado = new Empleado();
 		model.put("empleado", empleado);
-		model.put("titulo", "Formulario de Empleado");
+		model.put("titulo", messageSource.getMessage("text.empleado.form.titulo", null, locale));
 		return "empleado/form";
 	}
 	
 	
 	@RequestMapping(value = "empleado/form/{id}")
-	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash, Locale locale) {
 
 		Empleado empleado = null;
 
@@ -117,25 +123,25 @@ public class EmpleadoController {
 			
 			empleado = empleadoService.findOne(id);
 			if (empleado == null) {
-				flash.addFlashAttribute("error", "El ID del Empleado no existe en la BBDD!");
+				flash.addFlashAttribute("error", messageSource.getMessage("text.empleado.flash.db.error", null, locale));
 				return "redirect:/listar-empleado";
 			}
 		} else {
-			flash.addFlashAttribute("error", "El ISBN del libro no puede ser cero!");
+			flash.addFlashAttribute("error", messageSource.getMessage("text.empleado.flash.id.error", null, locale));
 			return "redirect:/listar-empleado";
 		}
 		model.put("Empleado", empleado);
-		model.put("titulo", "Editar Empleado");
+		model.put("titulo", messageSource.getMessage("text.empleado.form.editar", null, locale));
 		return "empleado/form";
 	}
 
 
 	@RequestMapping(value = "empleado/form", method = RequestMethod.POST)
 	public String guardar(@Valid Empleado empleado, BindingResult result, Model model, 
-			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) {
+			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status, Locale locale) {
 		
 		if (result.hasErrors()) {
-			model.addAttribute("titulo", "Formulario de Empleado");
+			model.addAttribute("titulo", messageSource.getMessage("text.empleado.form.titulo", null, locale));
 			return "/empleado/form";
 		}
 		
@@ -179,7 +185,7 @@ public class EmpleadoController {
 		
 		}
 		
-		String mensajeFlash = (empleado.getId() != null) ? "Empleado editado con éxito!" : "Empleado creado con éxito!";
+		String mensajeFlash = (empleado.getId() != null) ?  messageSource.getMessage("text.empleado.flash.editar.success", null, locale) : messageSource.getMessage("text.empleado.flash.crear.success", null, locale);
 
 		empleadoService.save(empleado);
 		status.setComplete();
@@ -189,18 +195,18 @@ public class EmpleadoController {
 	
 	
 	@RequestMapping(value = "/empleado/eliminar/{id}")
-	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
+	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash, Locale locale) {
 
 	    if (id > 0) {
 	        Empleado empleado = empleadoService.findOne(id);
 	        if (empleado == null) {
-	            flash.addFlashAttribute("error", "El empleado no existe en la base de datos");
+	        	flash.addFlashAttribute("error", messageSource.getMessage("text.empleado.flash.db.error", null, locale));
 	            return "redirect:/listar-empleado";
 	        }
 
 	        // Eliminar el empleado de la base de datos
 	        empleadoService.delete(id);
-	        flash.addFlashAttribute("success", "Empleado eliminado con éxito!");
+	        flash.addFlashAttribute("success", messageSource.getMessage("text.empleado.flash.eliminar.success", null, locale));
 
 	        // Eliminar la foto asociada al empleado si existe
 	        if (empleado.getFoto() != null && !empleado.getFoto().isEmpty()) {
@@ -214,7 +220,7 @@ public class EmpleadoController {
 	            }
 	        }
 	    } else {
-	        flash.addFlashAttribute("error", "El Id del empleado no puede ser cero!");
+	    	flash.addFlashAttribute("error", messageSource.getMessage("text.empleado.flash.id.error", null, locale));
 	    }
 	    return "redirect:/listar-empleado";
 	}

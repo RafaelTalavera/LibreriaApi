@@ -15,18 +15,20 @@
 
 
 			<h4 class="card-title mx-2 my-2 "> <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm"
-					th:href="@{/factura/form/} + ${cliente.id}" th:text="'Facturar'"></a></h4>
+					th:href="@{/factura/form/} + ${cliente.id}" th:text="#{text.cliente.ver.comprar}"></a></h4>
 			<ul class="list-group">
 				<li class="list-group-item">
 					<div class="font-italic">
-						<label class="font-weight-bold text-dark bg-warning px-2 rounded">ID: </label>
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded"
+							th:text="#{text.cliente.ver.id}">ID: </label>
 						<span class="ml-2" th:text="${cliente.id}"></span>
 					</div>
 				</li>
 
 				<li class="list-group-item">
 					<div class="font-italic">
-						<label class="font-weight-bold text-dark bg-warning px-2 rounded">DNI: </label>
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded"
+							th:text="#{text.cliente.ver.dni}">DNI: </label>
 						<span class="ml-2" th:text="${cliente.dni}"></span>
 					</div>
 
@@ -34,48 +36,53 @@
 				</li>
 				<li class="list-group-item">
 					<div class="font-italic">
-						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Dirección: </label>
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded"
+							th:text="#{text.cliente.ver.direccion}">Dirección: </label>
 						<span class="ml-2" th:text="${cliente.direccion}"></span>
 					</div>
 				</li>
 				<li class="list-group-item">
 					<div class="font-italic">
-						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Email: </label>
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded"
+							th:text="#{text.cliente.ver.email}">Email: </label>
 						<span class="ml-2" th:text="${cliente.email}"></span>
 					</div>
 				</li>
 				<li class="list-group-item">
 					<div class="font-italic">
-						<label class="font-weight-bold text-dark bg-warning px-2 rounded">Telefono: </label>
+						<label class="font-weight-bold text-dark bg-warning px-2 rounded"
+							th:text="#{text.cliente.ver.telefono}">Telefono: </label>
 						<span class="ml-2" th:text="${cliente.tel}"></span>
 					</div>
 				</li>
 
 				<li class="list-group-item">
 
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-ms" th:href="@{/cliente/form/} + ${cliente.id}"
-							th:text="'Editar'"></a>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-ms"
+							th:href="@{/cliente/form/} + ${cliente.id}" th:text="#{text.cliente.ver.editar}"></a>
 					</td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-ms" th:href="@{/cliente/eliminar/} + ${cliente.id}"
-							th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-ms"
+							th:href="@{/cliente/eliminar/} + ${cliente.id}" th:text="#{text.cliente.ver.eliminar}"
+							onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
 					</td>
 				</li>
 			</ul>
 
-			<div th:if="${#lists.isEmpty(cliente.facturas)}" class="alert alert-info my-4"
-				th:text="'No hay facturas par mostrar del cliente: ' + ${cliente.nombre} + '  ' + ${cliente.apellido}">
+			<div th:if="${#lists.isEmpty(cliente.facturas)}" class="alert alert-info my-4">
+				<span th:text="#{text.cliente.ver.mostar} + ' ' + ${cliente.nombre + ' ' + cliente.apellido}"></span>
 			</div>
 
 			<div class="table-responsive">
 				<table th:if="${not #lists.isEmpty(cliente.facturas)}" class="table table-bordered table-striped my-4">
 					<thead class="thead-inverse">
 						<tr>
-							<th>Folio</th>
-							<th>Descripción</th>
-							<th>fecha</th>
-							<th>total</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">ver</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+							<th th:text="#{text.cliente.ver.folio}">Folio</th>
+							<th th:text="#{text.cliente.ver.descripcion}">Descripción</th>
+							<th th:text="#{text.cliente.ver.fecha}">fecha</th>
+							<th th:text="#{text.cliente.ver.total}">total</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.cliente.ver.detalle}">ver</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.cliente.ver.eliminar}">Eliminar
+							</th>
 
 						</tr>
 					</thead>
@@ -85,10 +92,12 @@
 							<td th:text="${factura.descripcion}"></td>
 							<td th:text="${factura.createAt}"></td>
 							<td th:text="${factura.total}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm" th:href="@{'/factura/ver/' + ${factura.id}}"
-									th:text="'detalle'"></a></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-sm" th:href="@{'/factura/eliminar/' + ${factura.id}}"
-									th:text="'eliminar'"
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-sm"
+									th:href="@{'/factura/ver/' + ${factura.id}}"
+									th:text="#{text.cliente.ver.detalle}"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-sm"
+									th:href="@{'/factura/eliminar/' + ${factura.id}}"
+									th:text="#{text.cliente.ver.eliminar}"
 									onclick="return confirm('¿Estás seguro de que deseas eliminar la factura?');">Eliminar</a>
 							</td>
 

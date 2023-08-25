@@ -14,9 +14,9 @@
 
 			<div class="card bg-light text-dark mb-3">
 				<div class="card-body">
-					
+
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">DNI</label>
+						<label class="col-sm-2 col-form-label" th:text="#{text.cliente.form.dni}">DNI</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{dni}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -26,7 +26,7 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Nombre</label>
+						<label class="col-sm-2 col-form-label" th:text="#{text.cliente.form.nombre}">Nombre</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{nombre}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -36,7 +36,8 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Apellido</label>
+						<label class="col-sm-2 col-form-label"
+							th:text="#{text.cliente.form.apellido}">Apellido</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{apellido}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -46,7 +47,8 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Dirección</label>
+						<label class="col-sm-2 col-form-label"
+							th:text="#{text.cliente.form.direccion}">Dirección</label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{direccion}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -56,7 +58,7 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Email</label>
+						<label class="col-sm-2 col-form-label" th:text="#{text.cliente.form.email}">Email</label>
 						<div class="col-sm-6">
 							<input type="email" th:field="*{email}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -66,7 +68,8 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Telefono</label>
+						<label class="col-sm-2 col-form-label"
+							th:text="#{text.cliente.form.telefono}">Telefono</label>
 						<div class="col-sm-6">
 							<input type="number" th:field="*{tel}" class="form-control"
 								th:errorclass="'form-control alert-darger'" />
@@ -78,7 +81,8 @@
 					<div class="container mt-3">
 						<div class="container">
 							<div class="col-sm-6">
-								<input type="submit" value="Crear Cliente" class="btn btn-primary btn-sm" />
+								<input type="submit" th:value="#{text.cliente.form.crear}"
+									class="btn btn-primary btn-sm" />
 							</div>
 						</div>
 					</div>
