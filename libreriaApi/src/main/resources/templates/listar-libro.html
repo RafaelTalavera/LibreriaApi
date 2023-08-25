@@ -12,7 +12,7 @@
     <div class="container mt-4">
 
         <div class="form-group">
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/libro/form}">Crear libro</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" th:href="@{/libro/form}" th:text="#{text.libro.listar.alta}">Crear libro</a>
         </div>
         <form class="form-inline mb-4" th:action="@{/buscar}" method="get">
             <div class="form-group">
@@ -29,13 +29,13 @@
     <table class="table border border-secundary table-hover container text-center" id="librosTable">
         <thead>
             <tr class="table-primary">
-                <th>isbn</th>
-                <th>Titulo</th>
-                <th>Autor</th>
-                <th>Año</th>
-                <th>Stock</th>
-                <th>precio</th>
-                <th>Editorial</th>
+                <th th:text="#{text.libro.listar.isbn}">isbn</th>
+                <th th:text="#{text.libro.listar.titulo}">Titulo</th>
+                <th th:text="#{text.libro.listar.autor}">Autor</th>
+                <th th:text="#{text.libro.listar.anio}">Año</th>
+                <th th:text="#{text.libro.listar.stock}">Stock</th>
+                <th th:text="#{text.libro.listar.precio}">precio</th>
+                <th th:text="#{text.libro.listar.editorial}">Editorial</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -50,12 +50,12 @@
                 <td th:text="${libro.stock}"></td>
                 <td th:text="${libro.precio}"></td>
                 <td th:text="${libro.edito}"></td>
-                <td><a class="btn btn-warning btn-sm" th:href="@{/libro/ver/__${libro.id}__}" th:text="'ver'"></a>
-                </td>
+                <td><a class="btn btn-warning btn-sm" th:href="@{/libro/ver/__${libro.id}__}" 
+                        th:text="#{text.libro.listar.ver}"></a></td>
                 <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary btn-sm" th:href="@{/libro/form/__${libro.id}__}"
-                        th:text="'Editar'"></a></td>
+                        th:text="#{text.libro.listar.editar}"></a></td>
                 <td><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-sm" th:href="@{/libro/eliminar/} + ${libro.id}"
-                        th:text="'eliminar'" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
+                       th:text="#{text.libro.listar.eliminar}" onclick="return confirm ('Estas seguro que quieres Eliminar');"></a>
                 </td>
             </tr>
         </tbody>

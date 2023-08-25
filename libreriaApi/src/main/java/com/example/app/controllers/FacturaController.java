@@ -1,9 +1,12 @@
 package com.example.app.controllers;
 
 import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +49,8 @@ public class FacturaController {
 	@Autowired
 	private ILibroService libroService;
 	
+	@Autowired
+	private MessageSource messageSource;
 
 	
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -54,16 +59,16 @@ public class FacturaController {
 	@GetMapping("/factura/ver/{id}")
 	public String ver(@PathVariable(value="id") Long id, 
 			Model model,
-			RedirectAttributes flash) {
+			RedirectAttributes flash, Locale locale) {
 		Factura factura = facturaService.findOne(id);
 		
 		if(factura == null) {
-			flash.addFlashAttribute("error", "La factura no existe en la base de datos!");
+			flash.addFlashAttribute("error", messageSource.getMessage("text.compra.flash.db.error", null, locale));
 			return "redirect:/listar-factura";
 		}
 		
 		model.addAttribute("factura", factura);
-		model.addAttribute("titulo", "Factura: ".concat(factura.getDescripcion()));
+		model.addAttribute("titulo", String.format(messageSource.getMessage("text.compra.ver.titulo", null, locale), factura.getDescripcion()));
 		model.addAttribute("items", factura.getItems());
 		
 		return "factura/ver";
@@ -73,20 +78,20 @@ public class FacturaController {
 	
 	@GetMapping("/factura/form/{clienteId}")
 	public String crear(@PathVariable("clienteId") Long clienteId, Model model,
-	        RedirectAttributes flash) {
+	        RedirectAttributes flash, Locale locale) {
 
 	    Cliente cliente = clienteService.findOne(clienteId);
 
 	    if (cliente == null) {
-	        flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
-	        return "redirect:/listar";
+	    	flash.addFlashAttribute("error", messageSource.getMessage("text.cliente.flash.db.error", null, locale));
+	        return "redirect:/listar-cliente";
 	    }
 
 	    Factura factura = new Factura();
 	    factura.setCliente(cliente);
 
 	    model.addAttribute("factura", factura);
-	    model.addAttribute("titulo", "Crear Factura");
+	    model.addAttribute("titulo", messageSource.getMessage("text.compra.form.titulo", null, locale));
 
 	    return "factura/form";
 	}
@@ -132,14 +137,14 @@ public class FacturaController {
 
 	
 	@RequestMapping(value = "/listar-factura", method = RequestMethod.GET)
-	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model) {
+	public String listar(@RequestParam(name="page", defaultValue="0") int page, Model model, Locale locale) {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
 		
 		Page<Factura> facturas = facturaService.findAll(pageRequest);
 		
 		PageRender<Factura> pageRender = new PageRender<>("/listar-factura", facturas);
-		model.addAttribute("titulo", "Listado de facturas");
+		model.addAttribute("titulo", messageSource.getMessage("text.compra.listar.titulo", null, locale));
 		model.addAttribute("facturas", facturas);
 		model.addAttribute("page", pageRender);
 		return "listar-factura";

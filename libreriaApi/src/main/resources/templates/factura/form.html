@@ -13,7 +13,7 @@
 			<div class="card-body">
 				<h4 class="card-title">
 					<a class="btn btn-info btn-sm" th:href="@{'/cliente/ver/' + ${factura.cliente.id}}"
-						th:text="'&laquo; volver'"></a>
+						th:text="#{text.compra.volver}"></a>
 				</h4>
 
 
@@ -21,7 +21,7 @@
 
 
 					<div class="form-group row">
-						<label for="cliente" class="col-sm-2 col-form-label" th:text="'Cliente'"></label>
+						<label for="cliente" class="col-sm-2 col-form-label" th:text="#{text.compra.cliente}"></label>
 						<div class="col-sm-6">
 							<input name="cliente"
 								th:value="${factura.cliente.nombre} + ' ' + ${factura.cliente.apellido}"
@@ -31,7 +31,7 @@
 
 
 					<div class="form-group row">
-						<label for="descripcion" class="col-sm-2 col-form-label" th:text="'Descripción'"></label>
+						<label for="descripcion" class="col-sm-2 col-form-label" th:text="#{text.compra.descripcion}"></label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{descripcion}" class="form-control" />
 						</div>
@@ -39,14 +39,14 @@
 
 
 					<div class="form-group row">
-						<label for="observacion" class="col-sm-2 col-form-label" th:text="'Observación'"></label>
+						<label for="observacion" class="col-sm-2 col-form-label" th:text="#{text.compra.observacion}"></label>
 						<div class="col-sm-6">
 							<textarea th:field="*{observacion}" class="form-control"></textarea>
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="empleado.id" class="col-sm-2 col-form-label" th:text="'Ingrese Id vendedor'"></label>
+						<label for="empleado.id" class="col-sm-2 col-form-label" th:text="#{text.compra.idvendedor}"></label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{empleado.id}" class="form-control" />
 						</div>
@@ -55,7 +55,7 @@
 
 					<div class="form-group row">
 						<label for="buscar_producto" class="col-sm-2 col-form-label"
-							th:text="'Buscar producto'"></label>
+							th:text="#{text.compra.buscar}"></label>
 						<div class="col-sm-6">
 							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" />
 						</div>
@@ -67,14 +67,14 @@
 						<thead>
 
 							<tr>
-								<th class="small custom-header">Titulo</th>
-								<th class="small custom-header">Autor</th>
-								<th class="small custom-header">Editorial</th>
-								<th class="small custom-header">Stock</th>
-								<th class="small custom-header">Precio</th>
-								<th class="small custom-header">Cantidad</th>
-								<th class="small custom-header">Total</th>
-								<th class="small custom-header">Eliminar</th>
+								<th class="small custom-header" th:text="#{text.compra.titulo}">Titulo</th>
+								<th class="small custom-header" th:text="#{text.compra.autor}">Autor</th>
+								<th class="small custom-header" th:text="#{text.compra.editorial}">Editorial</th>
+								<th class="small custom-header" th:text="#{text.compra.stock}">Stock</th>
+								<th class="small custom-header" th:text="#{text.compra.precio}">Precio</th>
+								<th class="small custom-header" th:text="#{text.compra.cantidad}">Cantidad</th>
+								<th class="small custom-header" th:text="#{text.compra.total}">Total</th>
+								<th class="small custom-header" th:text="#{text.compra.eliminar}">Eliminar</th>
 							</tr>
 
 

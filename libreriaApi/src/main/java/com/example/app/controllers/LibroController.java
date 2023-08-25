@@ -7,12 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -20,7 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +53,9 @@ public class LibroController {
 
 	@Autowired
 	private IClienteService clienteService;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -93,14 +98,14 @@ public class LibroController {
 	}
 
 	@RequestMapping(value = "/listar-libro", method = RequestMethod.GET)
-	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Locale locale) {
 
 		Pageable pageRequest = PageRequest.of(page, 8);
 
 		Page<Libro> libros = libroService.findALL(pageRequest);
 
 		PageRender<Libro> pageRender = new PageRender<>("/listar-libro", libros);
-		model.addAttribute("titulo", "Listado de libros");
+		model.addAttribute("titulo", messageSource.getMessage("text.libro.listar.titulo", null, locale));
 		model.addAttribute("libros", libros);
 		model.addAttribute("page", pageRender);
 		return "listar-libro";

@@ -15,13 +15,13 @@
 			<header>
 				<tr class="table-primary">
 
-					<th>Id</th>
-					<th>Descripcion</th>
-					<th>Observaciones</th>
-					<th>Fecha</th>
-					<th>Cliente</th>
-					<th>Vendedor</th>
-					<th>Importe $</th>
+					<th th:text="#{text.compra.listar.id}">Id</th>
+					<th th:text="#{text.compra.listar.descripcion}"></th>
+					<th th:text="#{text.compra.listar.observacacion}"></th>
+					<th th:text="#{text.compra.listar.fecha}"></th>
+					<th th:text="#{text.compra.listar.cliente}"></th>
+					<th th:text="#{text.compra.listar.vendedor}"></th>
+					<th th:text="#{text.compra.listar.importe}"></th>
 
 
 
@@ -30,7 +30,7 @@
 			<tbody>
 				<tr th:each="factura : ${facturas}">
 					<td><a class="btn btn-warning btn-sm" th:href="@{/factura/ver/} + ${factura.id}"
-							th:text="'ver'"></a></td>
+							th:text="#{text.compra.listar.ver}"></a></td>
 					<td th:text="${factura.descripcion}"></td>
 					<td th:text="${factura.observacion}"></td>
 					<td th:text="${factura.createAt}"></td>
