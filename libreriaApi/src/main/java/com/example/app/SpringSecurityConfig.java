@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.app.auth.handler.LoginSuccessHandler;
-import com.example.app.models.service.JpaUserDetailsService;
+
 
 
 @Configuration
@@ -17,8 +17,7 @@ public class SpringSecurityConfig {
     @Autowired
     private LoginSuccessHandler successHandler;
 
-    @Autowired
-    private JpaUserDetailsService userDetailsService;
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
